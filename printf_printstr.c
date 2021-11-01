@@ -1,16 +1,20 @@
 #include "libft/libft.h"
+#include "ft_printf.h"
 #include <unistd.h>
 
-int	printstr(const char *str)
+int	printstr(const char *str, t_opts opts)
 {
 	size_t	length;
 
 	if (!str)
-	{
-		write(STDOUT_FILENO, "(null)", 6);
-		return (6);
-	}
+		str = "(null)";
 	length = ft_strlen(str);
+	if (opts.precision >= 0)
+		length = ft_min(length, opts.precision);
+	if (!opts.left)
+		printf_pad(opts, opts.minwidth - length);
 	write(STDOUT_FILENO, str, length);
-	return (length);
+	if (opts.left)
+		printf_pad(opts, opts.minwidth - length);
+	return (ft_max(length, opts.minwidth));
 }
