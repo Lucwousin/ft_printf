@@ -58,11 +58,12 @@ int	ft_printf(const char *str, ...)
 	va_list	args;
 	size_t	printed;
 
+	printed = 0;
 	va_start(args, str);
 	while (1)
 	{
 		if (*str == '\0')
-			return (printed);
+			break ;
 		if (*str != '%')
 			printed += print_until_percent(&str);
 		else
@@ -72,4 +73,5 @@ int	ft_printf(const char *str, ...)
 		}
 	}
 	va_end(args);
+	return (printed);
 }
