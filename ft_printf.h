@@ -1,5 +1,6 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# include <stdarg.h>
 
 //  %[flags][width][.precision][length modifier]conversion
 
@@ -35,6 +36,11 @@ typedef struct s_printf_opts
  * Should segfault when format_string is null
  */
 int		ft_printf(const char *format_string, ...);
+
+t_opts	parse_options(const char **str, va_list args);
+
+int	printchar(char c, t_opts opts);
+int	printstr(const char *str, t_opts opts);
 
 void	printf_pad(t_opts opts, int count);
 
