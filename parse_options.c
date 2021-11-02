@@ -45,7 +45,7 @@ int	parse_number(const char **str, va_list args)
 	if (*s == '*')
 	{
 		retval = va_arg(args, int);
-		*str = s + 1;
+		++s;
 	}
 	else
 	{
@@ -68,7 +68,14 @@ t_opts	parse_options(const char **str, va_list args)
 	initialize_options(&opts);
 	parse_flags(str, &opts);
 	if (ft_isdigit(**str) || **str == '*')
+	{
 		opts.minwidth = parse_number(str, args);
+		if (opts.minwidth < 0)
+		{
+			opts.minwidth *= -1;
+			opts.left = 1;
+		}
+	}
 	if (**str == '.')
 	{
 		++(*str);
