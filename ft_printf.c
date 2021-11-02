@@ -1,12 +1,37 @@
-#include <stdarg.h>
+#include "ft_printf.h"
 #include <unistd.h>
 
-int	insert_conversion(char **str, va_list args)
+
+int	print_type(char c, t_opts options, va_list args)
+{
+	if (c == 'c')
+		return (printchar((char) va_arg(args, int), options));
+	if (c == 's')
+		return (printstr(va_arg(args, char *), options));
+	//if (c == 'p')
+	//	return (printptr(va_arg(args, void *), options));
+	//if (c == 'd' || c == 'i')
+	//	return (printint(va_arg(args, int), options));
+	//if (c == 'u')
+	//	return (printuint(va_arg(args, unsigned int), options));
+	//if (c == 'x')
+	//	return (printhex(va_arg(args, unsigned int), options, 0));
+	//if (c == 'X')
+	//	return (printhex(va_arg(args, unsigned int), options, 1));
+	//if (c == '%')
+	//	return (printchar('%', options));
+	return (0);
+}
+
+int	insert_conversion(const char **str, va_list args)
 {
 	t_opts	options;
+	int		printed;
 
 	options = parse_options(str, args);
-	return (0);
+	printed = print_type(**str, options, args);
+	(*str)++;
+	return (printed);
 }
 
 /**
@@ -46,4 +71,5 @@ int	ft_printf(const char *str, ...)
 			printed += insert_conversion(&str, args);
 		}
 	}
+	va_end(args);
 }
