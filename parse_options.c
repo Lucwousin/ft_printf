@@ -71,7 +71,7 @@ t_opts	parse_options(const char **str, va_list args)
 		opts.minwidth = parse_number(str, args);
 	if (**str == '.')
 	{
-		++str;
+		++(*str);
 		opts.precision = parse_number(str, args);
 	}
 	return (opts);
