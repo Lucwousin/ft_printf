@@ -32,6 +32,8 @@ char	*ft_strtrim(const char *str, const char *set);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char	**ft_split(const char *str, char c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+void	ft_strtoupper(char *s);
+void	ft_strtolower(char *s);
 
 // Memory functions
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
