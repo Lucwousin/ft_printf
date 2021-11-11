@@ -10,16 +10,16 @@ int	print_type(char c, t_opts options, va_list args)
 		return (printstr(va_arg(args, char *), options));
 	//if (c == 'p')
 	//	return (printptr(va_arg(args, void *), options));
-	//if (c == 'd' || c == 'i')
-	//	return (printint(va_arg(args, int), options));
+	if (c == 'd' || c == 'i')
+		return (printint(va_arg(args, int), options));
 	//if (c == 'u')
 	//	return (printuint(va_arg(args, unsigned int), options));
 	//if (c == 'x')
 	//	return (printhex(va_arg(args, unsigned int), options, 0));
 	//if (c == 'X')
 	//	return (printhex(va_arg(args, unsigned int), options, 1));
-	//if (c == '%')
-	//	return (printchar('%', options));
+	if (c == '%')
+		return (printchar('%', options));
 	return (0);
 }
 
@@ -50,7 +50,7 @@ int	print_until_percent(const char **str)
 		++count;
 	write(STDOUT_FILENO, s, count);
 	*str += count;
-	return count;
+	return (count);
 }
 
 int	ft_printf(const char *str, ...)
