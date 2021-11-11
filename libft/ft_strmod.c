@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	ft_strtolower(char *str)
+void	ft_strtoupper(char *str)
 {
 	while (*str)
 	{
