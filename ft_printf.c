@@ -8,8 +8,8 @@ int	print_type(char c, t_opts options, va_list args)
 		return (printchar((char) va_arg(args, int), options));
 	if (c == 's')
 		return (printstr(va_arg(args, char *), options));
-	//if (c == 'p')
-	//	return (printptr(va_arg(args, void *), options));
+	if (c == 'p')
+		return (printptr(va_arg(args, void *), options));
 	if (c == 'd' || c == 'i')
 		return (printint(va_arg(args, int), options));
 	//if (c == 'u')

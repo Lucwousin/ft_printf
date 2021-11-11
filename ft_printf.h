@@ -44,7 +44,8 @@ void	parse_flags(const char **str, t_opts *opts);
 int	printchar(char c, t_opts opts);
 int	printstr(const char *str, t_opts opts);
 int	printint(int n, t_opts opts);
-int	printhex(unsigned n, t_opts opts, int capitalize);
+int	printhex(unsigned long n, t_opts opts, int capitalize);
+int	printptr(void *p, t_opts opts);
 
 char	*printf_ltoa_base(long nbr, int base, t_opts opts);
 void	printf_pad(t_opts opts, int count);
