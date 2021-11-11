@@ -14,10 +14,10 @@ int	print_type(char c, t_opts options, va_list args)
 		return (printint(va_arg(args, int), options));
 	//if (c == 'u')
 	//	return (printuint(va_arg(args, unsigned int), options));
-	//if (c == 'x')
-	//	return (printhex(va_arg(args, unsigned int), options, 0));
-	//if (c == 'X')
-	//	return (printhex(va_arg(args, unsigned int), options, 1));
+	if (c == 'x')
+		return (printhex(va_arg(args, unsigned int), options, 0));
+	if (c == 'X')
+		return (printhex(va_arg(args, unsigned int), options, 1));
 	if (c == '%')
 		return (printchar('%', options));
 	return (0);

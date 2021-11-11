@@ -143,7 +143,7 @@ int	main(void)
 //	test_ltoa_base(123456,		16,	opts,	"+000001e240");
 
 
-	int a = printf("%#x\n", -100);
-	int b = ft_printf("%#x\n", -100);
+	int a = printf("%#100.52X\n", -100);
+	int b = ft_printf("%#100.52X\n", -100);
 	ft_printf("printf: %d, ft_printf: %d\n", a, b);
 }
