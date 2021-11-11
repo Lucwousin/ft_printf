@@ -16,7 +16,7 @@
 //		if the value is shorter than the field with, pad with spaces
 //		if the value is longer than this, expand the width
 //		* means the next arg is the min width (so the one before the value)
-// . == precision, followed by a decimal or * or *m$
+// . == precision, followed by a decimal or *
 //		if value is negative, ignore
 //		if there's no int, precision is 0
 //		* means the next arg is the precision (so the one before the value)
@@ -37,11 +37,16 @@ typedef struct s_printf_opts
  */
 int		ft_printf(const char *format_string, ...);
 
+void	initialize_options(t_opts *opts);
 t_opts	parse_options(const char **str, va_list args);
+void	parse_flags(const char **str, t_opts *opts);
 
 int	printchar(char c, t_opts opts);
 int	printstr(const char *str, t_opts opts);
+int	printint(int n, t_opts opts);
+int	printhex(unsigned n, t_opts opts, int capitalize);
 
+char	*printf_ltoa_base(long nbr, int base, t_opts opts);
 void	printf_pad(t_opts opts, int count);
 
 #endif //FT_PRINTF_H

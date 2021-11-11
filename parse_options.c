@@ -12,30 +12,6 @@ void	initialize_options(t_opts *opts)
 	opts->precision = -1;
 }
 
-void	parse_flags(const char **str, t_opts *opts)
-{
-	const char	*s;
-
-	s = *str;
-	while (*s)
-	{
-		if (*s == '#')
-			opts->pound = 1;
-		else if (*s == '0')
-			opts->zero = 1;
-		else if (*s == '-')
-			opts->left = 1;
-		else if (*s == ' ')
-			opts->space = 1;
-		else if (*s == '+')
-			opts->sign = 1;
-		else
-			break;
-		++s;
-	}
-	*str = s;
-}
-
 int	parse_number(const char **str, va_list args)
 {
 	const char	*s;
