@@ -11,9 +11,9 @@ int	print_type(char c, t_opts options, va_list args)
 	if (c == 'p')
 		return (printptr(va_arg(args, void *), options));
 	if (c == 'd' || c == 'i')
-		return (printint(va_arg(args, int), options));
-	//if (c == 'u')
-	//	return (printuint(va_arg(args, unsigned int), options));
+		return (printnbr(va_arg(args, int), options));
+	if (c == 'u')
+		return (printnbr(va_arg(args, unsigned int), options));
 	if (c == 'x')
 		return (printhex(va_arg(args, unsigned int), options, 0));
 	if (c == 'X')

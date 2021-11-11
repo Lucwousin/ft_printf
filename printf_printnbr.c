@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int	printint(int n, t_opts opts)
+int	printnbr(long n, t_opts opts)
 {
 	char	*nbr_str;
 	size_t	length;
