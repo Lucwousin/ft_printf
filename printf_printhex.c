@@ -2,15 +2,10 @@
 #include "libft/libft.h"
 #include <unistd.h>
 
-static void	prefix_alt(char **str)
+static void	add_alt(char *str)
 {
-	char	*joined;
-
-	joined = ft_strjoin("0x", *str);
-	if (!joined)
-		return ;
-	free(*str);
-	*str = joined;
+	str[0] = '0';
+	str[1] = 'x';
 }
 
 int	printhex(unsigned n, t_opts opts, int capitalize)
@@ -22,7 +17,7 @@ int	printhex(unsigned n, t_opts opts, int capitalize)
 	if (!nbr_str)
 		return (0);
 	if (opts.pound)
-		prefix_alt(&nbr_str);
+		add_alt(nbr_str);
 	if (capitalize)
 		ft_strtoupper(nbr_str);
 	length = ft_strlen(nbr_str);

@@ -52,6 +52,8 @@ char	*printf_ltoa_base(long nbr, int base, t_opts opts)
 	num_length = length_in_base(nbr, base);
 	add_sign = should_add_sign(nbr, base, opts);
 	num_length = ft_max(opts.precision, num_length);
+	if (base == 16 && opts.pound)
+		num_length += 2;
 	if (add_sign)
 		num_length++;
 	if (opts.precision >= 0 && opts.zero)
