@@ -40,13 +40,18 @@ const char	*create_format_string(int base, t_opts opts)
 		*s++ = ' ';
 	if (opts.sign)
 		*s++ = '+';
-	if (minwidth)
+	if (minwidth) {
+		char *c = minwidth;
 		while (*minwidth)
 			*s++ = *minwidth++;
+		free(c);
+	}
 	if (precision) {
+		char *c = precision;
 		*s++= '.';
 		while (*precision)
 			*s++ = *precision++;
+		free(c);
 	}
 	*s++ = base == 16 ? 'x' : 'd';
 	*s++ = '\0';
@@ -66,6 +71,8 @@ void	test_ltoa_base(long nbr, int base, t_opts opts)
 	);
 	printf("---- printf: %s (%d)\n", asprintf_output, asprintf_size);
 	free(output);
+	free(asprintf_output);
+	free((void *) format_str);
 }
 
 void	set_opts(t_opts *opts, int pound, int zero, int left, int space, int sign, int minwidth, int precision)
@@ -115,35 +122,10 @@ void	test_ltoa_bases(void)
 int	main(void)
 {
 	test_ltoa_bases();
-//	t_opts opts;
-//	initialize_options(&opts);
-//
-//	set_prec_sign(&opts, -1, 0);
-//	test_ltoa_base(123456,		10,	opts,	"123456");
-//	test_ltoa_base(123456,		16,	opts,	"1e240");
-//
-//	set_prec_sign(&opts, 10, 0);
-//	test_ltoa_base(123456,		10,	opts,	"0000123456");
-//	test_ltoa_base(123456,		16,	opts,	"000001e240");
-//
-//	set_prec_sign(&opts, -1, 1);
-//	test_ltoa_base(123456,		10,	opts,	"+123456");
-//	test_ltoa_base(123456,		16,	opts,	"+1e240");
-//
-//	set_prec_sign(&opts, -1, 0);
-//	test_ltoa_base(-123456,	10,	opts,	"-123456");
-//	test_ltoa_base(-123456,	16,	opts,	"-1e240");
-//
-//	set_prec_sign(&opts, 10, 0);
-//	test_ltoa_base(-123456,	10,	opts,	"-0000123456");
-//	test_ltoa_base(-123456,	16,	opts,	"-000001e240");
-//
-//	set_prec_sign(&opts, 10, 1);
-//	test_ltoa_base(123456,		10,	opts,	"+0000123456");
-//	test_ltoa_base(123456,		16,	opts,	"+000001e240");
 
-
-	int a = printf("%#100.52X\n", -100);
-	int b = ft_printf("%#100.52X\n", -100);
+	int a = printf(" %c \n", '0');
+	int b = ft_printf(" %c \n", '0');
 	ft_printf("printf: %d, ft_printf: %d\n", a, b);
+
+	system("leaks test-exe");
 }
