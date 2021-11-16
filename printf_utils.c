@@ -24,6 +24,8 @@ void	printf_pad(t_opts opts, int count)
 	char c;
 	int i;
 
+	if (count <= 0)
+		return ;
 	c = ' ';
 	if (opts.zero && !opts.left)
 		c = '0';
