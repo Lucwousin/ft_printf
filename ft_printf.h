@@ -47,6 +47,21 @@ int	printnbr(long n, t_opts opts);
 int	printhex(unsigned long n, t_opts opts, int capitalize);
 int	printptr(void *p, t_opts opts);
 
+/**
+ * Return the absolute value of nbr, as an unsigned long
+ */
+unsigned long	to_uns(long nbr);
+
+/**
+ * Return the amount of characters needed to display number nbr in base base
+ */
+int	length_in_base(unsigned long nbr, int base);
+
+/**
+ * Write number nbr into the first length characters of str
+ * converted to base base
+ */
+void	write_number(char *str, unsigned long nbr, int base, int length);
 char	*printf_ltoa_base(long nbr, int base, t_opts opts);
 void	printf_pad(t_opts opts, int count);
 

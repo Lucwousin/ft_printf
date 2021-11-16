@@ -1,4 +1,5 @@
 SRCS = ft_printf.c\
+	   nbr_to_str_utils.c\
 	   parse_flags.c\
 	   parse_options.c\
 	   printf_ltoa.c\
