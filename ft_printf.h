@@ -44,9 +44,9 @@ void	parse_flags(const char **str, t_opts *opts);
 int	printchar(char c, t_opts opts);
 int	printstr(const char *str, t_opts opts);
 int	printnbr(long n, t_opts opts);
-int	printhex(unsigned long n, t_opts opts, int capitalize);
-int	printptr(void *p, t_opts opts);
-
+int	printhex(unsigned long n, t_opts opts, int capitalize); // TODO: Check what printf("%#x", 0) prints also MAX/MIN LONG
+int	printptr(void *p, t_opts opts); // TODO: Check what printf("%p", NULL) prints
+// TODO: Norminette
 /**
  * Return the absolute value of nbr, as an unsigned long
  */
