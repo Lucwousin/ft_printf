@@ -7,7 +7,8 @@ SRCS = ft_printf.c\
 	   printf_printhex.c\
 	   printf_printnbr.c\
 	   printf_printstr.c\
-	   printf_utils.c
+	   printf_utils.c\
+	   ul_to_hex.c
 
 NAME = libftprintf.a
 

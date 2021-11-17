@@ -11,9 +11,9 @@ static void	add_alt(char *str)
 int	printhex(unsigned long n, t_opts opts, int capitalize)
 {
 	char	*nbr_str;
-	size_t	length;
+	int 	length;
 
-	nbr_str = printf_ltoa_base(n, 16, opts);
+	nbr_str = ul_to_hex(n, opts);
 	if (!nbr_str)
 		return (0);
 	if (opts.pound)

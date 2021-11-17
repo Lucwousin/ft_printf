@@ -63,6 +63,7 @@ int	length_in_base(unsigned long nbr, int base);
  */
 void	write_number(char *str, unsigned long nbr, int base, int length);
 char	*printf_ltoa_base(long nbr, int base, t_opts opts);
+char	*ul_to_hex(unsigned long nbr, t_opts opts);
 void	printf_pad(t_opts opts, int count);
 
 #endif //FT_PRINTF_H
