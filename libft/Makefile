@@ -69,7 +69,7 @@ all: $(NAME)
 
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "Done cleaning $(CURDIR)/$(OBJSDIR)"
+	@echo "Done cleaning $(CURDIR)/$(OBJS_DIR)"
 
 fclean: clean
 	@rm -f $(NAME)
