@@ -43,38 +43,40 @@ SRCS_B = ft_lstadd_back.c\
 		 ft_lstlast.c\
 		 ft_lstmap.c\
 		 ft_lstnew.c\
-		 ft_lstsize.c
+		 ft_lstsize.c\
+		 $(SRCS)
 
 NAME = libft.a
-
+OBJS_DIR = objs/
 OBJS = $(SRCS:.c=.o)
-
+OBJS_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJS))
 OBJS_B = $(SRCS_B:.c=.o)
+OBJS_B_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJS_B))
 
 CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
-FLAGS = -Wall -Werror -Wextra
-
-%.o : %.c
+$(OBJS_DIR)%.o : %.c libft.h
+	@mkdir -p $(OBJS_DIR)
 	@echo "Compiling: $<"
-	@$(CC) $(FLAGS) -c $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
-$(NAME): $(OBJS)
-	@ar -cr $(NAME) $(OBJS)
-	@echo "Done creating archive"
+$(NAME): $(OBJS_PREFIXED)
+	@ar -cr $(NAME) $(OBJS_PREFIXED)
+	@echo "Done creating archive $(CURDIR)/$(NAME)"
 
 all: $(NAME)
 
 clean:
-	@rm -f $(OBJS) $(OBJS_B)
-	@echo "Done cleaning objects"
+	@rm -rf $(OBJS_DIR)
+	@echo "Done cleaning $(CURDIR)/$(OBJSDIR)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "Done cleaning archive"
+	@echo "Done cleaning archive $(CURDIR)/$(NAME)"
 
 re: fclean all
 
-bonus: $(OBJS_B)
-	@ar -cr $(NAME) $(OBJS_B)
+bonus: $(OBJS_B_PREFIXED)
+	@ar -cr $(NAME) $(OBJS_B_PREFIXED)
 	@echo "Done adding bonus objects to archive"
