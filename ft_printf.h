@@ -1,6 +1,6 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-int				ft_printf(const char *format_string, ...);
+int	ft_printf(const char *format_string, ...);
 
 #endif //FT_PRINTF_H
