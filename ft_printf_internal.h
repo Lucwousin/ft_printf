@@ -20,7 +20,7 @@ void			parse_flags(const char **str, t_opts *opts);
 int				printchar(char c, t_opts opts);
 int				printstr(const char *str, t_opts opts);
 int				printnbr(long n, t_opts opts);
-int				printhex(unsigned long n, t_opts opts, int capitalize);
+int				printhex(unsigned long n, t_opts opts, int capitalize, int pointer);
 int				printptr(void *p, t_opts opts);
 
 /**

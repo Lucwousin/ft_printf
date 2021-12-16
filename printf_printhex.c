@@ -8,12 +8,12 @@ static void	add_alt(char *str)
 	str[1] = 'x';
 }
 
-int	printhex(unsigned long n, t_opts opts, int capitalize)
+int	printhex(unsigned long n, t_opts opts, int capitalize, int pointer)
 {
 	char	*nbr_str;
 	int		length;
 
-	if (n == 0)
+	if (n == 0 && !pointer)
 		opts.pound = 0;
 	nbr_str = ul_to_hex(n, opts);
 	if (!nbr_str)
@@ -37,5 +37,5 @@ int	printhex(unsigned long n, t_opts opts, int capitalize)
 int	printptr(void *p, t_opts opts)
 {
 	opts.pound = 1;
-	return (printhex((unsigned long) p, opts, 0));
+	return (printhex((unsigned long) p, opts, 0, 1));
 }

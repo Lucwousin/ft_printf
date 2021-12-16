@@ -14,9 +14,9 @@ int	print_type(char c, t_opts options, va_list args)
 	if (c == 'u')
 		return (printnbr(va_arg(args, unsigned int), options));
 	if (c == 'x')
-		return (printhex(va_arg(args, unsigned int), options, 0));
+		return (printhex(va_arg(args, unsigned int), options, 0, 0));
 	if (c == 'X')
-		return (printhex(va_arg(args, unsigned int), options, 1));
+		return (printhex(va_arg(args, unsigned int), options, 1, 0));
 	if (c == '%')
 		return (printchar('%', options));
 	return (0);
