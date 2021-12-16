@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
 static void	set_zero(t_opts *opts)
 {

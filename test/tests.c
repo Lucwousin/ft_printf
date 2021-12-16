@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "../ft_printf.h"
+#include "../ft_printf_internal.h"
 #include "../libft/libft.h"
 
 char	*ok_ko(int ok)
@@ -123,9 +125,10 @@ int	main(void)
 {
 	test_ltoa_bases();
 
-	int a = printf(" %c \n", '0');
-	int b = ft_printf(" %c \n", '0');
+	int a = printf(" %#x ", 0);
+	int b = ft_printf(" %#x ", 0);
 	ft_printf("printf: %d, ft_printf: %d\n", a, b);
-
-	system("leaks test-exe");
+	a = printf(" %#x ", LONG_MIN);
+	b = ft_printf(" %#x ", LONG_MIN);
+	ft_printf("printf: %d, ft_printf: %d\n", a, b);
 }

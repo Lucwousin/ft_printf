@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 #include "libft/libft.h"
 
 char	*ul_to_hex(unsigned long nbr, t_opts opts)

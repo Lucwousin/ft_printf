@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 #include "libft/libft.h"
 
 static void	add_signchar(char *str, int negative, int space)

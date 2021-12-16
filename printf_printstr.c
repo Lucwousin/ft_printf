@@ -1,5 +1,5 @@
 #include "libft/libft.h"
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 #include <unistd.h>
 
 int	printstr(const char *str, t_opts opts)

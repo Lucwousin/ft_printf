@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 #include <unistd.h>
 
 int	print_type(char c, t_opts options, va_list args)
