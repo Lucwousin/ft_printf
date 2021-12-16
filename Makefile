@@ -53,6 +53,4 @@ test: all
 	@$(CC) test/tests.c $(NAME) $(LIBFT) -o test-exe
 	./test-exe
 
-bonus: $(OBJS_B)
-	@ar -cr $(NAME) $(OBJS_B)
-	@echo "Done adding bonus objects to archive"
+bonus: all
