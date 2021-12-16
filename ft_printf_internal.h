@@ -42,4 +42,4 @@ char			*printf_ltoa_base(long nbr, int base, t_opts opts);
 char			*ul_to_hex(unsigned long nbr, t_opts opts);
 void			printf_pad(t_opts opts, int count);
 
-#endif //FT_PRINTF_FT_PRINTF_INTERNAL_H
+#endif //FT_PRINTF_INTERNAL_H
