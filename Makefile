@@ -27,7 +27,7 @@ $(OBJS_DIR)%.o : %.c
 	@echo "Compiling: $<"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
-$(NAME): $(OBJS_PREFIXED)
+$(NAME): $(OBJS_PREFIXED) ft_printf.h ft_printf_internal.h
 	@echo "Making libft!"
 	@$(MAKE) all bonus -C $(LIBFT_DIR)
 	@cp $(LIBFT) $(NAME)
