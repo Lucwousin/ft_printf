@@ -11,7 +11,7 @@ static void	add_alt(char *str)
 int	printhex(unsigned long n, t_opts opts, int capitalize)
 {
 	char	*nbr_str;
-	int 	length;
+	int		length;
 
 	if (n == 0)
 		opts.pound = 0;
@@ -34,7 +34,7 @@ int	printhex(unsigned long n, t_opts opts, int capitalize)
 	return (ft_max(length, opts.minwidth));
 }
 
-int printptr(void *p, t_opts opts)
+int	printptr(void *p, t_opts opts)
 {
 	opts.pound = 1;
 	return (printhex((unsigned long) p, opts, 0));

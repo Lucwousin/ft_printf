@@ -1,7 +1,6 @@
 #include "ft_printf.h"
 #include <unistd.h>
 
-
 int	print_type(char c, t_opts options, va_list args)
 {
 	if (c == 'c')

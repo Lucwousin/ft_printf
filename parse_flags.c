@@ -42,7 +42,7 @@ void	parse_flags(const char **str, t_opts *opts)
 		else if (*s == '+')
 			set_sign(opts);
 		else
-			break;
+			break ;
 		++s;
 	}
 	*str = s;

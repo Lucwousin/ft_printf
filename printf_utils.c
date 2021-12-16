@@ -4,7 +4,7 @@
 
 /**
  * This is just as fast for a count of 1 or 2.
- * The faster way is nearly constant, while this way gets way slower for bigger counts.
+ * The fast way is nearly constant. This way gets way slower for bigger counts.
  *
  * For count = 512 this way takes 330 cycles, the other takes 4.
  * I just kept this so I can work around failed mallocs (lol)
@@ -20,9 +20,9 @@ static void	printf_pad_slow(char c, int count)
 
 void	printf_pad(t_opts opts, int count)
 {
-	char *s;
-	char c;
-	int i;
+	char	*s;
+	char	c;
+	int		i;
 
 	if (count <= 0)
 		return ;
@@ -33,7 +33,7 @@ void	printf_pad(t_opts opts, int count)
 	if (!s)
 	{
 		printf_pad_slow(c, count);
-		return;
+		return ;
 	}
 	i = count;
 	while (i > 0)
