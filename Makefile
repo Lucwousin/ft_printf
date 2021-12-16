@@ -12,36 +12,39 @@ SRCS = ft_printf.c\
 
 NAME = libftprintf.a
 
-LIBFT = libft/libft.a
+LIBFT_DIR = libft/
+LIBFT = $(LIBFT_DIR)libft.a
 
+OBJS_DIR = objs/
 OBJS = $(SRCS:.c=.o)
+OBJS_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJS))
 
 CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
-FLAGS = -Wall -Werror -Wextra
-
-%.o : %.c
+$(OBJS_DIR)%.o : %.c
+	@mkdir -p $(OBJS_DIR)
 	@echo "Compiling: $<"
-	@$(CC) $(FLAGS) -c $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS_PREFIXED)
 	@echo "Making libft!"
-	@$(MAKE) all bonus -C ./libft
+	@$(MAKE) all bonus -C $(LIBFT_DIR)
 	@cp $(LIBFT) $(NAME)
-	@ar -cr $(NAME) $(OBJS)
-	@echo "Done creating archive"
+	@ar -cr $(NAME) $(OBJS_PREFIXED)
+	@echo "Done creating archive $(CURDIR)/$(NAME)"
 
 all: $(NAME)
 
 clean:
-	@$(MAKE) clean -C ./libft
-	@rm -f $(OBJS)
-	@echo "Done cleaning objects"
+	@$(MAKE) clean -C $(LIBFT_DIR)
+	@rm -rf $(OBJS_DIR)
+	@echo "Done cleaning $(CURDIR)/$(OBJS_DIR)"
 
 fclean: clean
-	@$(MAKE) fclean -C ./libft
+	@$(MAKE) fclean -C $(LIBFT_DIR)
 	@rm -f $(NAME)
-	@echo "Done cleaning archive"
+	@echo "Done cleaning archive $(CURDIR)/$(NAME)"
 
 re: fclean all
 
