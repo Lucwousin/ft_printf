@@ -1,28 +1,28 @@
 #include "ft_printf_internal.h"
 #include <unistd.h>
 
-int	print_type(char c, t_opts options, va_list args)
+int	print_type(char c, t_opts options, va_list *args)
 {
 	if (c == 'c')
-		return (printchar((char) va_arg(args, int), options));
+		return (printchar((char) va_arg(*args, int), options));
 	if (c == 's')
-		return (printstr(va_arg(args, char *), options));
+		return (printstr(va_arg(*args, char *), options));
 	if (c == 'p')
-		return (printptr(va_arg(args, void *), options));
+		return (printptr(va_arg(*args, void *), options));
 	if (c == 'd' || c == 'i')
-		return (printnbr(va_arg(args, int), options));
+		return (printnbr(va_arg(*args, int), options));
 	if (c == 'u')
-		return (printnbr(va_arg(args, unsigned int), options));
+		return (printnbr(va_arg(*args, unsigned int), options));
 	if (c == 'x')
-		return (printhex(va_arg(args, unsigned int), options, 0, 0));
+		return (printhex(va_arg(*args, unsigned int), options, 0, 0));
 	if (c == 'X')
-		return (printhex(va_arg(args, unsigned int), options, 1, 0));
+		return (printhex(va_arg(*args, unsigned int), options, 1, 0));
 	if (c == '%')
 		return (printchar('%', options));
 	return (0);
 }
 
-int	insert_conversion(const char **str, va_list args)
+int	insert_conversion(const char **str, va_list *args)
 {
 	t_opts	options;
 	int		printed;
@@ -68,7 +68,7 @@ int	ft_printf(const char *str, ...)
 		else
 		{
 			++str;
-			printed += insert_conversion(&str, args);
+			printed += insert_conversion(&str, &args);
 		}
 	}
 	va_end(args);

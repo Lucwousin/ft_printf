@@ -12,7 +12,7 @@ void	initialize_options(t_opts *opts)
 	opts->precision = -1;
 }
 
-int	parse_number(const char **str, va_list args)
+int	parse_number(const char **str, va_list *args)
 {
 	const char	*s;
 	int			retval;
@@ -20,7 +20,7 @@ int	parse_number(const char **str, va_list args)
 	s = *str;
 	if (*s == '*')
 	{
-		retval = va_arg(args, int);
+		retval = va_arg(*args, int);
 		++s;
 	}
 	else
@@ -37,7 +37,7 @@ int	parse_number(const char **str, va_list args)
 	return (retval);
 }
 
-t_opts	parse_options(const char **str, va_list args)
+t_opts	parse_options(const char **str, va_list *args)
 {
 	t_opts		opts;
 

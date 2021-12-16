@@ -14,7 +14,7 @@ typedef struct s_printf_opts
 }		t_opts;
 
 void			initialize_options(t_opts *opts);
-t_opts			parse_options(const char **str, va_list args);
+t_opts			parse_options(const char **str, va_list *args);
 void			parse_flags(const char **str, t_opts *opts);
 
 int				printchar(char c, t_opts opts);
