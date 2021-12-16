@@ -13,6 +13,8 @@ int	printhex(unsigned long n, t_opts opts, int capitalize)
 	char	*nbr_str;
 	int 	length;
 
+	if (n == 0)
+		opts.pound = 0;
 	nbr_str = ul_to_hex(n, opts);
 	if (!nbr_str)
 		return (0);
