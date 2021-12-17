@@ -16,10 +16,31 @@ typedef struct s_printf_opts
 t_opts			parse_options(const char **str, va_list *args);
 void			parse_flags(const char **str, t_opts *opts);
 
+/**
+ * ===== CONVERSIONS =====
+ * %c
+ */
 int				printchar(char c, t_opts opts);
+/**
+ * %s
+ */
 int				printstr(const char *str, t_opts opts);
+/**
+ * %diu
+ */
 int				printnbr(long n, t_opts opts);
+/**
+ * %xX
+ *
+ * This function is also used by printptr (%p).
+ * @param cap Should the hex value be capitalized?
+ * @param pointer Are we dealing with a pointer?
+ * The pointer parameter is necessary because pointers always print 0x (even 0)
+ */
 int				printhex(unsigned long n, t_opts opts, int cap, int pointer);
+/**
+ * %p
+ */
 int				printptr(void *p, t_opts opts);
 
 /**
