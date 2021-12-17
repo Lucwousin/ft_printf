@@ -1,7 +1,7 @@
 #include "ft_printf_internal.h"
 #include "libft/libft.h"
 
-void	initialize_options(t_opts *opts)
+static void	initialize_options(t_opts *opts)
 {
 	opts->pound = 0;
 	opts->zero = 0;
