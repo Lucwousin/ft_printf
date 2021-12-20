@@ -33,6 +33,12 @@ void			parse_flags(const char **str, t_opts *opts);
  */
 int				printchar(char c, t_opts opts);
 /**
+ * %%
+ *
+ * Uses printchar but sets minwidth to 0
+ */
+int				printpercent(t_opts opts);
+/**
  * %s
  */
 int				printstr(const char *str, t_opts opts);

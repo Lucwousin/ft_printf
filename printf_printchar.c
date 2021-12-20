@@ -22,3 +22,9 @@ int	printchar(char c, t_opts opts)
 		printf_pad(opts, opts.minwidth - 1);
 	return (ft_max(1, opts.minwidth));
 }
+
+int	printpercent(t_opts opts)
+{
+	opts.minwidth = 0;
+	return (printchar('%', opts));
+}

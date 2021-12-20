@@ -29,7 +29,7 @@ int	print_type(char c, t_opts options, va_list *args)
 	if (c == 'X')
 		return (printhex(va_arg(*args, unsigned int), options, 1, 0));
 	if (c == '%')
-		return (printchar('%', options));
+		return (printpercent(options));
 	return (0);
 }
 
