@@ -19,12 +19,12 @@ unsigned long	to_uns(long nbr)
 		return (nbr);
 }
 
-int	length_in_base(unsigned long nbr, int base)
+int	length_in_base(unsigned long nbr, int base, int precision)
 {
 	int	n;
 
 	if (nbr == 0)
-		return (1);
+		return (precision != 0);
 	n = 0;
 	while (nbr != 0)
 	{

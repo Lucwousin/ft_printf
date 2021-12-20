@@ -62,7 +62,7 @@ unsigned long	to_uns(long nbr);
 /**
  * Return the amount of characters needed to display number nbr in base base
  */
-int				length_in_base(unsigned long nbr, int base);
+int				length_in_base(unsigned long nbr, int base, int precision);
 
 /**
  * Write number nbr into the first length characters of str

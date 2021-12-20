@@ -17,7 +17,7 @@ char	*ul_to_hex(unsigned long nbr, t_opts opts)
 	char	*str;
 	int		num_length;
 
-	num_length = length_in_base(nbr, 16);
+	num_length = length_in_base(nbr, 16, opts.precision);
 	num_length = ft_max(opts.precision, num_length);
 	if (opts.pound)
 		num_length += 2;

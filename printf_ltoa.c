@@ -33,7 +33,7 @@ char	*printf_ltoa_base(long nbr, int base, t_opts opts)
 	int		num_length;
 	int		add_sign;
 
-	num_length = length_in_base(to_uns(nbr), base);
+	num_length = length_in_base(to_uns(nbr), base, opts.precision);
 	add_sign = should_add_sign(nbr, base, opts);
 	num_length = ft_max(opts.precision, num_length);
 	if (base == 16 && opts.pound)
