@@ -61,6 +61,7 @@ t_opts	parse_options(const char **str, va_list *args)
 		{
 			opts.minwidth *= -1;
 			opts.left = 1;
+			opts.zero = 0;
 		}
 	}
 	if (**str == '.')
