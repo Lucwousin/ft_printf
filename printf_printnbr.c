@@ -19,7 +19,7 @@ int	printnbr(long n, t_opts opts)
 	char	*nbr_str;
 	size_t	length;
 
-	nbr_str = printf_ltoa_base(n, 10, opts);
+	nbr_str = printf_ltoa(n, opts);
 	if (!nbr_str)
 		return (0);
 	length = ft_strlen(nbr_str);

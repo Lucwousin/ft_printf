@@ -22,22 +22,20 @@ static void	add_signchar(char *str, int negative, int space)
 		str[0] = '+';
 }
 
-static int	should_add_sign(long nbr, int base, t_opts opts)
+static int	should_add_sign(long nbr, t_opts opts)
 {
-	return (base != 16 && (opts.sign || opts.space || nbr < 0));
+	return (opts.sign || opts.space || nbr < 0);
 }
 
-char	*printf_ltoa_base(long nbr, int base, t_opts opts)
+char	*printf_ltoa(long nbr, t_opts opts)
 {
 	char	*str;
 	int		num_length;
 	int		add_sign;
 
-	num_length = length_in_base(to_uns(nbr), base, opts.precision);
-	add_sign = should_add_sign(nbr, base, opts);
+	num_length = length_in_base(to_uns(nbr), 10, opts.precision);
+	add_sign = should_add_sign(nbr, opts);
 	num_length = ft_max(opts.precision, num_length);
-	if (base == 16 && opts.pound)
-		num_length += 2;
 	if (add_sign)
 		num_length++;
 	if (opts.precision >= 0 && opts.zero)
@@ -48,7 +46,7 @@ char	*printf_ltoa_base(long nbr, int base, t_opts opts)
 	if (!str)
 		return (NULL);
 	str[num_length] = '\0';
-	write_number(str, to_uns(nbr), base, num_length);
+	write_number(str, to_uns(nbr), 10, num_length);
 	if (add_sign)
 		add_signchar(str, nbr < 0, opts.space);
 	return (str);
