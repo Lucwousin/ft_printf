@@ -23,7 +23,7 @@ static void	initialize_options(t_opts *opts)
 	opts->precision = -1;
 }
 
-int	parse_number(const char **str, va_list *args)
+static int	parse_number(const char **str, va_list *args)
 {
 	const char	*s;
 	int			retval;
