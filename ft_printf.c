@@ -70,10 +70,8 @@ int	ft_printf(const char *str, ...)
 
 	printed = 0;
 	va_start(args, str);
-	while (1)
+	while (*str)
 	{
-		if (*str == '\0')
-			break ;
 		if (*str != '%')
 			printed += print_until_percent(&str);
 		else
