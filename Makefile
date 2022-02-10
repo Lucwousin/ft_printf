@@ -2,7 +2,6 @@ SRCS = ft_printf.c\
 	   nbr_to_str_utils.c\
 	   parse_flags.c\
 	   parse_options.c\
-	   printf_ltoa.c\
 	   printf_printchar.c\
 	   printf_printhex.c\
 	   printf_printnbr.c\

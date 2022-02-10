@@ -75,7 +75,6 @@ int				length_in_base(unsigned long nbr, int base, int precision);
  * converted to base base
  */
 void			write_number(char *s, unsigned long n, int base, int length);
-char			*printf_ltoa(long nbr, t_opts opts);
 char			*ul_to_hex(unsigned long nbr, t_opts opts);
 void			printf_pad(t_opts opts, int count);
 
