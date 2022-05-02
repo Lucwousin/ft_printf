@@ -1,12 +1,43 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: lsinke <lsinke@student.codam.nl>             +#+                      #
+#                                                    +#+                       #
+#    Created: 2022/04/20 12:19:17 by lsinke        #+#    #+#                  #
+#    Updated: 2022/04/20 12:19:17 by lsinke        ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = libft.a
+
+OBJ_DIR = obj/
+SRC_DIR = src/
+INC_DIR = include/
+
 SRCS = ft_atoi.c\
 	   ft_bzero.c\
 	   ft_calloc.c\
+	   ft_free_mult.c\
+	   ft_hextoui.c\
+	   ft_interpolate.c\
 	   ft_isalnum.c\
 	   ft_isalpha.c\
 	   ft_isascii.c\
 	   ft_isdigit.c\
 	   ft_isprint.c\
 	   ft_itoa.c\
+	   ft_lstadd_back.c\
+	   ft_lstadd_front.c\
+	   ft_lstclear.c\
+	   ft_lstdelone.c\
+	   ft_lstdelelem.c\
+	   ft_lstiter.c\
+	   ft_lstlast.c\
+	   ft_lstmap.c\
+	   ft_lstnew.c\
+	   ft_lstsize.c\
 	   ft_memchr.c\
 	   ft_memcmp.c\
 	   ft_memcpy.c\
@@ -18,6 +49,7 @@ SRCS = ft_atoi.c\
 	   ft_putstr_fd.c\
 	   ft_simple_math.c\
 	   ft_split.c\
+	   ft_split_map.c\
 	   ft_strchr.c\
 	   ft_strdup.c\
 	   ft_striteri.c\
@@ -33,33 +65,19 @@ SRCS = ft_atoi.c\
 	   ft_strtrim.c\
 	   ft_substr.c\
 	   ft_tolower.c\
-	   ft_toupper.c
+	   ft_toupper.c\
+	   get_next_line.c
 
-SRCS_B = ft_lstadd_back.c\
-		 ft_lstadd_front.c\
-		 ft_lstclear.c\
-		 ft_lstdelone.c\
-		 ft_lstiter.c\
-		 ft_lstlast.c\
-		 ft_lstmap.c\
-		 ft_lstnew.c\
-		 ft_lstsize.c\
-		 $(SRCS)
-
-NAME = libft.a
-OBJS_DIR = objs/
 OBJS = $(SRCS:.c=.o)
-OBJS_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJS))
-OBJS_B = $(SRCS_B:.c=.o)
-OBJS_B_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJS_B))
+OBJS_PREFIXED = $(addprefix $(OBJ_DIR), $(OBJS))
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
-$(OBJS_DIR)%.o : %.c libft.h
-	@mkdir -p $(OBJS_DIR)
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INC_DIR)libft.h $(INC_DIR)get_next_line.h
+	@mkdir -p $(OBJ_DIR)
 	@echo "Compiling: $<"
-	@$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -c -o $@ $<
 
 $(NAME): $(OBJS_PREFIXED)
 	@ar -cr $(NAME) $(OBJS_PREFIXED)
@@ -68,8 +86,8 @@ $(NAME): $(OBJS_PREFIXED)
 all: $(NAME)
 
 clean:
-	@rm -rf $(OBJS_DIR)
-	@echo "Done cleaning $(CURDIR)/$(OBJS_DIR)"
+	@rm -rf $(OBJ_DIR)
+	@echo "Done cleaning $(CURDIR)/$(OBJ_DIR)"
 
 fclean: clean
 	@rm -f $(NAME)
@@ -77,6 +95,4 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OBJS_B_PREFIXED)
-	@ar -cr $(NAME) $(OBJS_B_PREFIXED)
-	@echo "Done adding bonus objects to archive"
+.PHONY: all clean fclean re
