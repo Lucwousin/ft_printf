@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   printf_printchar.c                                 :+:    :+:            */
+/*   ul_to_hex.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lsinke <lsinke@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
@@ -10,21 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf_internal.h"
-#include "libft/libft.h"
-#include <unistd.h>
+#include "libft.h"
 
-int	printchar(char c, t_opts opts)
+char	*ul_to_hex(unsigned long nbr, t_opts opts)
 {
-	if (!opts.left)
-		printf_pad(opts, opts.minwidth - 1);
-	ft_putchar_fd(c, STDOUT_FILENO);
-	if (opts.left)
-		printf_pad(opts, opts.minwidth - 1);
-	return (ft_max(1, opts.minwidth));
-}
+	char	*str;
+	int		num_length;
 
-int	printpercent(t_opts opts)
-{
-	opts.minwidth = 0;
-	return (printchar('%', opts));
+	num_length = length_in_base(nbr, 16, opts.precision);
+	num_length = ft_max(opts.precision, num_length);
+	if (opts.pound)
+		num_length += 2;
+	if (opts.precision >= 0 && opts.zero)
+		opts.zero = 0;
+	if (opts.zero)
+		num_length = ft_max(opts.minwidth, num_length);
+	str = malloc((num_length + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	str[num_length] = '\0';
+	write_number(str, nbr, 16, num_length);
+	return (str);
 }

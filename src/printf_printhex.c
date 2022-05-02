@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   printf_printnbr.c                                  :+:    :+:            */
+/*   printf_printhex.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lsinke <lsinke@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
@@ -10,58 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf_internal.h"
-#include "libft/libft.h"
-#include <stdlib.h>
+#include "libft.h"
 #include <unistd.h>
 
-static void	add_signchar(char *str, int negative, int space)
+static void	add_alt(char *str)
 {
-	if (negative)
-		str[0] = '-';
-	else if (space)
-		str[0] = ' ';
-	else
-		str[0] = '+';
+	str[0] = '0';
+	str[1] = 'x';
 }
 
-static int	should_add_sign(long nbr, t_opts opts)
-{
-	return (opts.sign || opts.space || nbr < 0);
-}
-
-static char	*printf_ltoa(long nbr, t_opts opts)
-{
-	char	*str;
-	int		num_length;
-	int		add_sign;
-
-	num_length = length_in_base(to_uns(nbr), 10, opts.precision);
-	add_sign = should_add_sign(nbr, opts);
-	num_length = ft_max(opts.precision, num_length);
-	if (add_sign)
-		num_length++;
-	if (opts.precision >= 0 && opts.zero)
-		opts.zero = 0;
-	if (opts.zero)
-		num_length = ft_max(opts.minwidth, num_length);
-	str = malloc((num_length + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	str[num_length] = '\0';
-	write_number(str, to_uns(nbr), 10, num_length);
-	if (add_sign)
-		add_signchar(str, nbr < 0, opts.space);
-	return (str);
-}
-
-int	printnbr(long n, t_opts opts)
+int	printhex(unsigned long n, t_opts opts, int capitalize, int pointer)
 {
 	char	*nbr_str;
-	size_t	length;
+	int		length;
 
-	nbr_str = printf_ltoa(n, opts);
+	if (n == 0 && !pointer)
+		opts.pound = 0;
+	nbr_str = ul_to_hex(n, opts);
 	if (!nbr_str)
 		return (0);
+	if (opts.pound)
+		add_alt(nbr_str);
+	if (capitalize)
+		ft_strtoupper(nbr_str);
 	length = ft_strlen(nbr_str);
 	if (opts.zero)
 		opts.zero = 0;
@@ -72,4 +43,10 @@ int	printnbr(long n, t_opts opts)
 		printf_pad(opts, opts.minwidth - length);
 	free(nbr_str);
 	return (ft_max(length, opts.minwidth));
+}
+
+int	printptr(void *p, t_opts opts)
+{
+	opts.pound = 1;
+	return (printhex((unsigned long) p, opts, 0, 1));
 }

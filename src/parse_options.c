@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf_internal.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 static void	initialize_options(t_opts *opts)
 {

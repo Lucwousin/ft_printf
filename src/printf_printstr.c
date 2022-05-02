@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   printf_utils.c                                     :+:    :+:            */
+/*   printf_printstr.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: lsinke <lsinke@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
@@ -9,49 +9,23 @@
 /*   Updated: 2021/12/18 17:55:07 by lsinke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 #include "ft_printf_internal.h"
-#include "libft/libft.h"
 #include <unistd.h>
 
-/**
- * This is just as fast for a count of 1 or 2.
- * The fast way is nearly constant. This way gets way slower for bigger counts.
- *
- * For count = 512 this way takes 330 cycles, the other takes 4.
- * I just kept this so I can work around failed mallocs (lol)
- */
-static void	printf_pad_slow(char c, int count)
+int	printstr(const char *str, t_opts opts)
 {
-	while (count > 0)
-	{
-		ft_putchar_fd(c, STDOUT_FILENO);
-		--count;
-	}
-}
+	size_t	length;
 
-void	printf_pad(t_opts opts, int count)
-{
-	char	*s;
-	char	c;
-	int		i;
-
-	if (count <= 0)
-		return ;
-	c = ' ';
-	if (opts.zero && !opts.left)
-		c = '0';
-	s = malloc(count);
-	if (!s)
-	{
-		printf_pad_slow(c, count);
-		return ;
-	}
-	i = count;
-	while (i > 0)
-	{
-		--i;
-		s[i] = c;
-	}
-	write(STDOUT_FILENO, s, count);
-	free(s);
+	if (!str)
+		str = "(null)";
+	length = ft_strlen(str);
+	if (opts.precision >= 0)
+		length = ft_min(length, opts.precision);
+	if (!opts.left)
+		printf_pad(opts, opts.minwidth - length);
+	write(STDOUT_FILENO, str, length);
+	if (opts.left)
+		printf_pad(opts, opts.minwidth - length);
+	return (ft_max(length, opts.minwidth));
 }
