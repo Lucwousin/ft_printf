@@ -13,13 +13,13 @@
 #include "ft_printf_internal.h"
 #include <unistd.h>
 
-int	printstr(const char *str, t_opts opts)
+int32_t	printstr(const char *str, t_opts opts)
 {
-	size_t	length;
+	int32_t	length;
 
 	if (!str)
 		str = "(null)";
-	length = ft_strlen(str);
+	length = (int32_t) ft_strlen(str);
 	if (opts.precision >= 0)
 		length = ft_min(length, opts.precision);
 	if (!opts.left)

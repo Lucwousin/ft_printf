@@ -22,18 +22,14 @@
  */
 static void	printf_pad_slow(char c, int count)
 {
-	while (count > 0)
-	{
+	while (count-- > 0)
 		ft_putchar_fd(c, STDOUT_FILENO);
-		--count;
-	}
 }
 
 void	printf_pad(t_opts opts, int count)
 {
 	char	*s;
 	char	c;
-	int		i;
 
 	if (count <= 0)
 		return ;
@@ -46,12 +42,7 @@ void	printf_pad(t_opts opts, int count)
 		printf_pad_slow(c, count);
 		return ;
 	}
-	i = count;
-	while (i > 0)
-	{
-		--i;
-		s[i] = c;
-	}
+	ft_memset(s, c, count);
 	write(STDOUT_FILENO, s, count);
 	free(s);
 }

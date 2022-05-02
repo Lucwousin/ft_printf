@@ -24,8 +24,7 @@ SRCS = ft_printf.c\
 	   printf_printhex.c\
 	   printf_printnbr.c\
 	   printf_printstr.c\
-	   printf_utils.c\
-	   ul_to_hex.c
+	   printf_utils.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_PREFIXED = $(addprefix $(OBJ_DIR), $(OBJS))

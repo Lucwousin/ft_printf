@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <unistd.h>
 
-int	printchar(char c, t_opts opts)
+int32_t	printchar(char c, t_opts opts)
 {
 	if (!opts.left)
 		printf_pad(opts, opts.minwidth - 1);
@@ -23,7 +23,7 @@ int	printchar(char c, t_opts opts)
 	return (ft_max(1, opts.minwidth));
 }
 
-int	printpercent(t_opts opts)
+int32_t	printpercent(t_opts opts)
 {
 	opts.minwidth = 0;
 	return (printchar('%', opts));

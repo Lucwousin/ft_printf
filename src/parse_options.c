@@ -14,35 +14,32 @@
 
 static void	initialize_options(t_opts *opts)
 {
-	opts->pound = 0;
-	opts->zero = 0;
-	opts->left = 0;
-	opts->space = 0;
-	opts->sign = 0;
+	opts->pound = false;
+	opts->zero = false;
+	opts->left = false;
+	opts->space = false;
+	opts->sign = false;
 	opts->minwidth = 0;
 	opts->precision = -1;
 }
 
-static int	parse_number(const char **str, va_list *args)
+static int32_t	parse_number(const char **str, va_list *args)
 {
 	const char	*s;
-	int			retval;
+	int32_t		retval;
 
 	s = *str;
 	if (*s == '*')
 	{
-		retval = va_arg(*args, int);
-		++s;
+		*str = ++s;
+		return (va_arg(*args, int));
 	}
-	else
+	retval = 0;
+	while (ft_isdigit(*s))
 	{
-		retval = 0;
-		while (ft_isdigit(*s))
-		{
-			retval *= 10;
-			retval += *s - '0';
-			++s;
-		}
+		retval *= 10;
+		retval += *s - '0';
+		++s;
 	}
 	*str = s;
 	return (retval);
@@ -60,8 +57,8 @@ t_opts	parse_options(const char **str, va_list *args)
 		if (opts.minwidth < 0)
 		{
 			opts.minwidth *= -1;
-			opts.left = 1;
-			opts.zero = 0;
+			opts.left = true;
+			opts.zero = false;
 		}
 	}
 	if (**str == '.')

@@ -12,7 +12,7 @@
 #include "ft_printf_internal.h"
 #include <unistd.h>
 
-int	print_type(char c, t_opts options, va_list *args)
+int32_t	print_type(char c, t_opts options, va_list *args)
 {
 	if (c == 'c')
 		return (printchar((char) va_arg(*args, int), options));
@@ -25,18 +25,18 @@ int	print_type(char c, t_opts options, va_list *args)
 	if (c == 'u')
 		return (printnbr(va_arg(*args, unsigned int), options));
 	if (c == 'x')
-		return (printhex(va_arg(*args, unsigned int), options, 0, 0));
+		return (printhex(va_arg(*args, unsigned int), options, false, false));
 	if (c == 'X')
-		return (printhex(va_arg(*args, unsigned int), options, 1, 0));
+		return (printhex(va_arg(*args, unsigned int), options, true, false));
 	if (c == '%')
 		return (printpercent(options));
 	return (0);
 }
 
-int	insert_conversion(const char **str, va_list *args)
+int32_t	insert_conversion(const char **str, va_list *args)
 {
 	t_opts	options;
-	int		printed;
+	int32_t	printed;
 
 	options = parse_options(str, args);
 	printed = print_type(**str, options, args);
@@ -49,10 +49,10 @@ int	insert_conversion(const char **str, va_list *args)
  * This function increments the pointer in str to the '%' or '\0'
  * @return The amount of characters were printed.
  */
-int	print_until_percent(const char **str)
+int32_t	print_until_percent(const char **str)
 {
 	const char	*s;
-	size_t		count;
+	int32_t		count;
 
 	s = *str;
 	count = 0;
@@ -66,7 +66,7 @@ int	print_until_percent(const char **str)
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
-	size_t	printed;
+	int32_t	printed;
 
 	printed = 0;
 	va_start(args, str);

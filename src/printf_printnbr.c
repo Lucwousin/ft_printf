@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void	add_signchar(char *str, int negative, int space)
+static void	add_signchar(char *str, bool negative, bool space)
 {
 	if (negative)
 		str[0] = '-';
@@ -24,47 +24,45 @@ static void	add_signchar(char *str, int negative, int space)
 		str[0] = '+';
 }
 
-static int	should_add_sign(long nbr, t_opts opts)
+static bool	should_add_sign(int64_t nbr, t_opts opts)
 {
 	return (opts.sign || opts.space || nbr < 0);
 }
 
-static char	*printf_ltoa(long nbr, t_opts opts)
+static char	*printf_ltoa(int64_t nbr, t_opts opts, int32_t *num_length)
 {
 	char	*str;
-	int		num_length;
-	int		add_sign;
+	bool	add_sign;
 
-	num_length = length_in_base(to_uns(nbr), 10, opts.precision);
+	*num_length = length_in_base(to_uns(nbr), 10, opts.precision);
 	add_sign = should_add_sign(nbr, opts);
-	num_length = ft_max(opts.precision, num_length);
+	*num_length = ft_max(opts.precision, *num_length);
 	if (add_sign)
-		num_length++;
+		(*num_length)++;
 	if (opts.precision >= 0 && opts.zero)
-		opts.zero = 0;
+		opts.zero = false;
 	if (opts.zero)
-		num_length = ft_max(opts.minwidth, num_length);
-	str = malloc((num_length + 1) * sizeof(char));
+		*num_length = ft_max(opts.minwidth, *num_length);
+	str = malloc((*num_length + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	str[num_length] = '\0';
-	write_number(str, to_uns(nbr), 10, num_length);
+	str[*num_length] = '\0';
+	write_number(str, to_uns(nbr), 10, *num_length);
 	if (add_sign)
 		add_signchar(str, nbr < 0, opts.space);
 	return (str);
 }
 
-int	printnbr(long n, t_opts opts)
+int32_t	printnbr(int64_t n, t_opts opts)
 {
 	char	*nbr_str;
-	size_t	length;
+	int32_t	length;
 
-	nbr_str = printf_ltoa(n, opts);
+	nbr_str = printf_ltoa(n, opts, &length);
 	if (!nbr_str)
 		return (0);
-	length = ft_strlen(nbr_str);
 	if (opts.zero)
-		opts.zero = 0;
+		opts.zero = false;
 	if (!opts.left)
 		printf_pad(opts, opts.minwidth - length);
 	write(STDOUT_FILENO, nbr_str, length);

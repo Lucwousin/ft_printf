@@ -9,9 +9,11 @@
 /*   Updated: 2021/12/18 17:55:07 by lsinke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdint.h>
 #define BASE_CHARS "0123456789abcdef"
 
-unsigned long	to_uns(long nbr)
+uint64_t	to_uns(int64_t nbr)
 {
 	if (nbr < 0)
 		return (nbr * -1);
@@ -19,9 +21,9 @@ unsigned long	to_uns(long nbr)
 		return (nbr);
 }
 
-int	length_in_base(unsigned long nbr, int base, int precision)
+int32_t	length_in_base(uint64_t nbr, uint8_t base, int32_t precision)
 {
-	int	n;
+	int32_t	n;
 
 	if (nbr == 0)
 		return (precision != 0);
@@ -34,13 +36,12 @@ int	length_in_base(unsigned long nbr, int base, int precision)
 	return (n);
 }
 
-void	write_number(char *str, unsigned long nbr, int base, int length)
+void	write_number(char *str, uint64_t nbr, uint8_t base, uint32_t length)
 {
-	int	base_index;
+	uint8_t	base_index;
 
-	while (length > 0)
+	while (length-- > 0)
 	{
-		--length;
 		base_index = nbr % base;
 		str[length] = BASE_CHARS[base_index];
 		nbr /= base;
