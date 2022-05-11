@@ -41,12 +41,14 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INC_DIR)ft_printf_internal.h $(LIBFT_INC)libft.h
 	@echo "Compiling: $<"
 	@$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC) -c -o $@ $<
 
-$(NAME): $(OBJS_PREFIXED)
-	@echo "Making libft!"
-	@$(MAKE) all -C $(LIBFT_DIR)
+$(NAME): $(LIBFT) $(OBJS_PREFIXED)
 	@cp $(LIBFT) $(NAME)
 	@ar -cr $(NAME) $(OBJS_PREFIXED)
 	@echo "Done creating archive $(CURDIR)/$(NAME)"
+
+$(LIBFT):
+	@echo "Making libft!"
+	@$(MAKE) -C $(LIBFT_DIR)
 
 all: $(NAME)
 
@@ -60,12 +62,8 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "Done cleaning archive $(CURDIR)/$(NAME)"
 
-re: fclean all
-
-test: all
-	@echo "Compiling test"
-	@$(CC) test/tests.c $(NAME) $(LIBFT) -o test-exe
-	./test-exe
+re: fclean
+	@$(MAKE)
 
 bonus: all
 
